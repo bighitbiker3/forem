@@ -24,6 +24,7 @@ def standard_production_config
     config.fog_directory = ApplicationConfig["AWS_BUCKET_NAME"]
     config.fog_provider = "fog/aws"
     config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
+    config.fog_public = false
     config.fog_credentials = {
       provider: "AWS",
       aws_access_key_id: ApplicationConfig["AWS_ID"],
@@ -57,5 +58,5 @@ if Rails.env.production? && ENV["FILE_STORAGE_LOCATION"] != "file"
     local_storage_config
   end
 else
-  local_storage_config
+  standard_production_config
 end
