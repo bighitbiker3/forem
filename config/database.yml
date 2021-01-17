@@ -87,6 +87,8 @@ test:
 #
   production:
     url: <%= ENV['DATABASE_URL'] %>
+    prepared_statements: false
+    advisory_locks: false
 #
 # production:
 #   <<: *default
