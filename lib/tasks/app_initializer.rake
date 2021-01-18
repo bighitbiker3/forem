@@ -1,8 +1,8 @@
 namespace :app_initializer do
   desc "Prepare Application on Boot Up"
   task setup: :environment do
-    # puts "\n== Preparing Elasticsearch =="
-    # Rake::Task["search:setup"].execute
+    puts "\n== Preparing Elasticsearch =="
+    Rake::Task["search:setup"].execute
 
     puts "\n== Preparing database =="
     system("bin/rails db:prepare") || exit!(1)
