@@ -1,8 +1,9 @@
 module Search
   class Cluster
     SEARCH_CLASSES = [
-      Search::ChatChannelMembership,
-      Search::Listing,
+      # Remove these now because we're not using them and got too many shards
+      # Search::ChatChannelMembership,
+      # Search::Listing,
       Search::FeedContent,
       Search::Tag,
       Search::User,
