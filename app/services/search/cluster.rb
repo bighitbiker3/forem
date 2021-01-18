@@ -24,6 +24,8 @@ module Search
 
       def update_settings
         Search::Client.cluster.put_settings(body: default_settings)
+      rescue StandardError
+        handle_exception
       end
 
       def create_indexes
@@ -66,6 +68,10 @@ module Search
             }
           }
         }
+      end
+
+      def handle_exception
+        Rails.logger.info("Error updating ElasticSearch cluster")
       end
     end
   end
