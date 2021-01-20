@@ -85,14 +85,14 @@ test:
 #
 # You can use this database configuration with:
 #
-  # production:
-  #   url: <%= ENV['DATABASE_URL'] %>
-  #   prepared_statements: false
-  #   advisory_locks: false
+  production:
+    url: <%= ENV['DATABASE_URL'] %>
+    prepared_statements: false
+    advisory_locks: false
 #
-production:
-  <<: *default
-  database: us_audio_production
-  pool: <%= ENV['DATABASE_POOL_SIZE'] %>
-  username: elliott
-  password: <%= ENV['US_AUDIO_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: us_audio_production
+#   pool: <%= ENV['DATABASE_POOL_SIZE'] %>
+#   username: elliott
+#   password: <%= ENV['US_AUDIO_DATABASE_PASSWORD'] %>
