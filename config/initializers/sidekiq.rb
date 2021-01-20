@@ -1,3 +1,4 @@
+require "sidekiq/worker_killer"
 module Sidekiq
   module Cron
     class Job
@@ -41,6 +42,7 @@ Sidekiq.configure_server do |config|
   config.redis = { url: sidekiq_url }
 
   config.server_middleware do |chain|
+    chain.add Sidekiq::WorkerKiller, max_rss: 480
     chain.add Sidekiq::HoneycombMiddleware
   end
 
