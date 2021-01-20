@@ -94,5 +94,5 @@ production:
   <<: *default
   database: us_audio_production
   pool: <%= ENV['DATABASE_POOL_SIZE'] %>
-  username: us_audio
+  username: elliott
   password: <%= ENV['US_AUDIO_DATABASE_PASSWORD'] %>
