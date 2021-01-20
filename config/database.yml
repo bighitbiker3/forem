@@ -85,10 +85,11 @@ test:
 #
 # You can use this database configuration with:
 #
-  production:
-    url: <%= ENV['DATABASE_URL'] %>
-    prepared_statements: false
-    advisory_locks: false
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+  prepared_statements: false
+  advisory_locks: false
 #
 # production:
 #   <<: *default
