@@ -9,6 +9,8 @@ class SetCookieDomain
   def call(env)
     if Rails.env.production?
       env["rack.session.options"][:domain] = ApplicationConfig["APP_DOMAIN"] || ".#{SiteConfig.app_domain}"
+      Rails.log.info(env["rack.session.options"][:domain])
+      Rails.log.info("Shit here")
     end
     @app.call(env)
   end
