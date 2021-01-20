@@ -1,4 +1,4 @@
-:concurrency: 7
+:concurrency: 2
 :queues:
   - ["default", 1]
   - ["low_priority", 10]
