@@ -220,19 +220,22 @@ export default class Chat extends Component {
 
   subscribePusher = (channelName) => {
     const { subscribedPusherChannels } = this.state;
-    const { pusherKey } = this.props;
+    const { pusherKey, pusherCluster } = this.props;
     if (!subscribedPusherChannels.includes(channelName)) {
-      setupPusher(pusherKey, {
-        channelId: channelName,
-        messageCreated: this.receiveNewMessage,
-        messageDeleted: this.removeMessage,
-        messageEdited: this.updateMessage,
-        channelCleared: this.clearChannel,
-        redactUserMessages: this.redactUserMessages,
-        channelError: this.channelError,
-        mentioned: this.mentioned,
-        messageOpened: this.messageOpened,
-      });
+      setupPusher(
+        { key: pusherKey, cluster: pusherCluster },
+        {
+          channelId: channelName,
+          messageCreated: this.receiveNewMessage,
+          messageDeleted: this.removeMessage,
+          messageEdited: this.updateMessage,
+          channelCleared: this.clearChannel,
+          redactUserMessages: this.redactUserMessages,
+          channelError: this.channelError,
+          mentioned: this.mentioned,
+          messageOpened: this.messageOpened,
+        },
+      );
       const subscriptions = subscribedPusherChannels;
       subscriptions.push(channelName);
       this.setState({ subscribedPusherChannels: subscriptions });

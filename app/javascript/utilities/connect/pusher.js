@@ -1,16 +1,16 @@
 // import Pusher from 'pusher-js';
 
-export function setupPusher(key, callbackObjects) {
+export function setupPusher(credentials, callbackObjects) {
   return import('pusher-js').then((_) => {
     const {
-      pusher = new Pusher(key, {
+      pusher = new Pusher(credentials.key, {
         authEndpoint: '/pusher/auth',
         auth: {
           headers: {
             'X-CSRF-Token': window.csrfToken,
           },
         },
-        cluster: 'us2',
+        cluster: credentials.cluster,
         encrypted: true,
       }),
     } = window;

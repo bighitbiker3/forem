@@ -7,10 +7,12 @@ import { setupPusher } from './pusher';
 class UnopenedChannelNotice extends Component {
   propTypes = {
     pusherKey: PropTypes.Object,
+    pusherCluster: PropTypes.string,
   };
 
   static defaultProps = {
     pusherKey: undefined,
+    pusherCluster: undefined,
   };
 
   constructor(props) {
@@ -22,16 +24,19 @@ class UnopenedChannelNotice extends Component {
   }
 
   componentDidMount() {
-    const { pusherKey } = this.props;
+    const { pusherKey, pusherCluster } = this.props;
     const { appDomain } = document.body.dataset;
-    setupPusher(pusherKey, {
-      channelId: `private-message-notifications--${appDomain}-${window.currentUser.id}`,
-      messageCreated: this.receiveNewMessage,
-      messageDeleted: this.removeMessage,
-      messageEdited: this.updateMessage,
-      mentioned: this.mentionedMessage,
-      messageOpened: this.messageOpened,
-    });
+    setupPusher(
+      { key: pusherKey, cluster: pusherCluster },
+      {
+        channelId: `private-message-notifications--${appDomain}-${window.currentUser.id}`,
+        messageCreated: this.receiveNewMessage,
+        messageDeleted: this.removeMessage,
+        messageEdited: this.updateMessage,
+        mentioned: this.mentionedMessage,
+        messageOpened: this.messageOpened,
+      },
+    );
     this.fetchUnopenedChannel(this.updateMessageNotification);
 
     document.getElementById('connect-link').onclick = () => {
@@ -228,7 +233,10 @@ export function getUnopenedChannels() {
     return;
   }
   render(
-    <UnopenedChannelNotice pusherKey={document.body.dataset.pusherKey} />,
+    <UnopenedChannelNotice
+      pusherKey={document.body.dataset.pusherKey}
+      pusherCluster={document.body.dataset.pusherCluster}
+    />,
     document.getElementById('message-notice'),
   );
 }

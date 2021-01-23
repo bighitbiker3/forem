@@ -12,6 +12,7 @@
       id="chat"
       class="live-chat"
       data-pusher-key="<%= ApplicationConfig["PUSHER_KEY"] %>"
+      data-pusher-cluster="<%= ApplicationConfig["PUSHER_CLUSTER"] %>"
       data-github-token="<%= @github_token %>"
       data-chat-channels="<%= [] %>"
       data-chat-options="<%= { showChannelsList: true, showTimestamp: true, activeChannelId: @active_channel&.id, currentUserId: current_user.id }.to_json %>"
